@@ -10,24 +10,43 @@ import CoreData
 
 class ExpenseLocalDataSource {
     
-    static let shared = ExpenseLocalDataSource()
     
-    private static var context : NSManagedObjectContext?
+    private static var sharedInstance: ExpenseLocalDataSource!
+
+       var context: NSManagedObjectContext?
+
+       private init(context: NSManagedObjectContext?) {
+           self.context = context
+           ExpenseLocalDataSource.sharedInstance = self
+       }
+
+       static func shared(context: NSManagedObjectContext? = nil) -> ExpenseLocalDataSource {
+           switch sharedInstance {
+           case let i?:
+               i.context = context
+               return i
+           default:
+               sharedInstance = ExpenseLocalDataSource(context: context)
+               return sharedInstance
+           }
+       }
+
     
-    class func setup(_ context: NSManagedObjectContext){
-        ExpenseLocalDataSource.context = context
-    }
-    
-    private init() {
-        guard let context = ExpenseLocalDataSource.context else {
-            fatalError("Error - you must call setup before accessing MySingleton.shared")
+    func getExpenses() -> [Expense]? {
+        
+        let fetchRequest: NSFetchRequest<Expense> = NSFetchRequest(entityName: "Expense")
+        let sorter: NSSortDescriptor = NSSortDescriptor(key: "created" , ascending: false)
+        fetchRequest.sortDescriptors = [sorter]
+        fetchRequest.returnsObjectsAsFaults = false
+
+        var result = [Expense]()
+
+        do {
+            result = try context!.fetch(fetchRequest)
+        } catch let error as NSError{
+            print(error.localizedDescription)
         }
-    }
-    
-    
-    func getExpenses(completion: @escaping(_ expenses: [Expense], _ error: String?) -> Void) {
-        
-        
+        return result
     }
     
     func saveExpense(expense: Expense) {
