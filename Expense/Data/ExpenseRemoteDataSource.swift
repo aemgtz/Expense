@@ -9,8 +9,10 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 
-class ExpenseRemoteDataSource: NSObject {
+class ExpenseRemoteDataSource {
     
+    static let shared = ExpenseRemoteDataSource()
+
     private let db = Firestore.firestore()
     private let collectionName = "expenses"
     
@@ -81,7 +83,16 @@ class ExpenseRemoteDataSource: NSObject {
         }
     }
     
-    func deleteExpense(expense: Expense) {
+    func deleteExpense(expense: Expense, completion: @escaping(_ isSuccess: Bool?, _ error: String?) -> Void) {
         
+        db.collection(collectionName).document(expense.identifier!).delete() { err in
+                    if let err = err {
+                        print("Error removing document: \(err)")
+                        completion(nil, err.localizedDescription)
+                    } else {
+                        print("Document successfully removed!")
+                        completion(true, nil)
+                    }
+                }
     }
 }
