@@ -17,6 +17,17 @@
 		D49BD90A2907BFC6006E501F /* ExpenseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD9092907BFC6006E501F /* ExpenseTests.swift */; };
 		D49BD9142907BFC6006E501F /* ExpenseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD9132907BFC6006E501F /* ExpenseUITests.swift */; };
 		D49BD9162907BFC6006E501F /* ExpenseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD9152907BFC6006E501F /* ExpenseUITestsLaunchTests.swift */; };
+		D49BD9292907C82F006E501F /* Expenses+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD9272907C82F006E501F /* Expenses+CoreDataProperties.swift */; };
+		D49BD92A2907C82F006E501F /* Expenses+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD9282907C82F006E501F /* Expenses+CoreDataClass.swift */; };
+		D49BD92C2907D67F006E501F /* ExpenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD92B2907D67F006E501F /* ExpenseTableViewCell.swift */; };
+		D49BD92E2907EC86006E501F /* AddEditExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD92D2907EC86006E501F /* AddEditExpenseViewController.swift */; };
+		D4AA2D13290911EF00FA0CC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4AA2D12290911EF00FA0CC9 /* GoogleService-Info.plist */; };
+		D4AA2D17290914E600FA0CC9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D4AA2D16290914E600FA0CC9 /* FirebaseAuth */; };
+		D4AA2D19290914E600FA0CC9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D4AA2D18290914E600FA0CC9 /* FirebaseFirestore */; };
+		D4AA2D1B290914E600FA0CC9 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D4AA2D1A290914E600FA0CC9 /* FirebaseFirestoreSwift */; };
+		D4AA2D1D2909176700FA0CC9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA2D1C2909176700FA0CC9 /* LoginViewController.swift */; };
+		D4AA2D2029091CAA00FA0CC9 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D4AA2D1F29091CAA00FA0CC9 /* GoogleSignIn */; };
+		D4AA2D2229091CAA00FA0CC9 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D4AA2D2129091CAA00FA0CC9 /* GoogleSignInSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +62,12 @@
 		D49BD90F2907BFC6006E501F /* ExpenseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpenseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D49BD9132907BFC6006E501F /* ExpenseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseUITests.swift; sourceTree = "<group>"; };
 		D49BD9152907BFC6006E501F /* ExpenseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D49BD9272907C82F006E501F /* Expenses+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Expenses+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D49BD9282907C82F006E501F /* Expenses+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Expenses+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D49BD92B2907D67F006E501F /* ExpenseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTableViewCell.swift; sourceTree = "<group>"; };
+		D49BD92D2907EC86006E501F /* AddEditExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditExpenseViewController.swift; sourceTree = "<group>"; };
+		D4AA2D12290911EF00FA0CC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D4AA2D1C2909176700FA0CC9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +75,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4AA2D2229091CAA00FA0CC9 /* GoogleSignInSwift in Frameworks */,
+				D4AA2D17290914E600FA0CC9 /* FirebaseAuth in Frameworks */,
+				D4AA2D2029091CAA00FA0CC9 /* GoogleSignIn in Frameworks */,
+				D4AA2D19290914E600FA0CC9 /* FirebaseFirestore in Frameworks */,
+				D4AA2D1B290914E600FA0CC9 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,13 +123,18 @@
 		D49BD8EE2907BFC4006E501F /* Expense */ = {
 			isa = PBXGroup;
 			children = (
+				D49BD9262907C82F006E501F /* Data */,
 				D49BD8EF2907BFC4006E501F /* AppDelegate.swift */,
 				D49BD8F12907BFC4006E501F /* SceneDelegate.swift */,
+				D4AA2D1C2909176700FA0CC9 /* LoginViewController.swift */,
 				D49BD8F32907BFC4006E501F /* ViewController.swift */,
+				D49BD92D2907EC86006E501F /* AddEditExpenseViewController.swift */,
+				D49BD92B2907D67F006E501F /* ExpenseTableViewCell.swift */,
 				D49BD8F52907BFC4006E501F /* Main.storyboard */,
 				D49BD8FB2907BFC5006E501F /* Assets.xcassets */,
 				D49BD8FD2907BFC5006E501F /* LaunchScreen.storyboard */,
 				D49BD9002907BFC5006E501F /* Info.plist */,
+				D4AA2D12290911EF00FA0CC9 /* GoogleService-Info.plist */,
 				D49BD8F82907BFC4006E501F /* Expense.xcdatamodeld */,
 			);
 			path = Expense;
@@ -130,6 +157,15 @@
 			path = ExpenseUITests;
 			sourceTree = "<group>";
 		};
+		D49BD9262907C82F006E501F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				D49BD9272907C82F006E501F /* Expenses+CoreDataProperties.swift */,
+				D49BD9282907C82F006E501F /* Expenses+CoreDataClass.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,6 +182,13 @@
 			dependencies = (
 			);
 			name = Expense;
+			packageProductDependencies = (
+				D4AA2D16290914E600FA0CC9 /* FirebaseAuth */,
+				D4AA2D18290914E600FA0CC9 /* FirebaseFirestore */,
+				D4AA2D1A290914E600FA0CC9 /* FirebaseFirestoreSwift */,
+				D4AA2D1F29091CAA00FA0CC9 /* GoogleSignIn */,
+				D4AA2D2129091CAA00FA0CC9 /* GoogleSignInSwift */,
+			);
 			productName = Expense;
 			productReference = D49BD8EC2907BFC4006E501F /* Expense.app */;
 			productType = "com.apple.product-type.application";
@@ -218,6 +261,10 @@
 				Base,
 			);
 			mainGroup = D49BD8E32907BFC4006E501F;
+			packageReferences = (
+				D4AA2D15290914E600FA0CC9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				D4AA2D1E29091CAA00FA0CC9 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
 			productRefGroup = D49BD8ED2907BFC4006E501F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -235,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D49BD8FF2907BFC5006E501F /* LaunchScreen.storyboard in Resources */,
+				D4AA2D13290911EF00FA0CC9 /* GoogleService-Info.plist in Resources */,
 				D49BD8FC2907BFC5006E501F /* Assets.xcassets in Resources */,
 				D49BD8F72907BFC4006E501F /* Main.storyboard in Resources */,
 			);
@@ -261,10 +309,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4AA2D1D2909176700FA0CC9 /* LoginViewController.swift in Sources */,
 				D49BD8FA2907BFC4006E501F /* Expense.xcdatamodeld in Sources */,
 				D49BD8F42907BFC4006E501F /* ViewController.swift in Sources */,
+				D49BD92C2907D67F006E501F /* ExpenseTableViewCell.swift in Sources */,
 				D49BD8F02907BFC4006E501F /* AppDelegate.swift in Sources */,
+				D49BD9292907C82F006E501F /* Expenses+CoreDataProperties.swift in Sources */,
+				D49BD92A2907C82F006E501F /* Expenses+CoreDataClass.swift in Sources */,
 				D49BD8F22907BFC4006E501F /* SceneDelegate.swift in Sources */,
+				D49BD92E2907EC86006E501F /* AddEditExpenseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,7 +506,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aemgtz.expense.Expense;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aemgtz.app.expense;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -480,7 +533,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aemgtz.expense.Expense;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aemgtz.app.expense;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -498,7 +551,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aemgtz.expense.ExpenseTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aemgtz.app.expensetest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -517,7 +570,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aemgtz.expense.ExpenseTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aemgtz.app.expensetest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -534,7 +587,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aemgtz.expense.ExpenseUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aemgtz.app.expenseuitest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -551,7 +604,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.aemgtz.expense.ExpenseUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aemgtz.app.expenseuitest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -600,6 +653,53 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D4AA2D15290914E600FA0CC9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 9.6.0;
+			};
+		};
+		D4AA2D1E29091CAA00FA0CC9 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 6.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D4AA2D16290914E600FA0CC9 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4AA2D15290914E600FA0CC9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		D4AA2D18290914E600FA0CC9 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4AA2D15290914E600FA0CC9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		D4AA2D1A290914E600FA0CC9 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4AA2D15290914E600FA0CC9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		D4AA2D1F29091CAA00FA0CC9 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4AA2D1E29091CAA00FA0CC9 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		D4AA2D2129091CAA00FA0CC9 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4AA2D1E29091CAA00FA0CC9 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		D49BD8F82907BFC4006E501F /* Expense.xcdatamodeld */ = {
