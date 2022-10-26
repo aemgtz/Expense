@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 
-public class Expenses: NSManagedObject {
+public class Expense: NSManagedObject {
 
 }

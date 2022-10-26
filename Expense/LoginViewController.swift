@@ -44,6 +44,22 @@ class LoginViewController: UIViewController {
                                                          accessToken: authentication.accessToken)
 
           // ...
+          firebaseAuthentication(credential: credential)
+        }
+    }
+    
+    private func firebaseAuthentication(credential : AuthCredential) {
+        
+        Auth.auth().signIn(with: credential) { authResult, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            // User is signed in
+            // ...
+            if (authResult?.user) != nil {
+                self.dismiss(animated: true)
+            }
         }
     }
     /*

@@ -17,8 +17,6 @@
 		D49BD90A2907BFC6006E501F /* ExpenseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD9092907BFC6006E501F /* ExpenseTests.swift */; };
 		D49BD9142907BFC6006E501F /* ExpenseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD9132907BFC6006E501F /* ExpenseUITests.swift */; };
 		D49BD9162907BFC6006E501F /* ExpenseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD9152907BFC6006E501F /* ExpenseUITestsLaunchTests.swift */; };
-		D49BD9292907C82F006E501F /* Expenses+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD9272907C82F006E501F /* Expenses+CoreDataProperties.swift */; };
-		D49BD92A2907C82F006E501F /* Expenses+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD9282907C82F006E501F /* Expenses+CoreDataClass.swift */; };
 		D49BD92C2907D67F006E501F /* ExpenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD92B2907D67F006E501F /* ExpenseTableViewCell.swift */; };
 		D49BD92E2907EC86006E501F /* AddEditExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49BD92D2907EC86006E501F /* AddEditExpenseViewController.swift */; };
 		D4AA2D13290911EF00FA0CC9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4AA2D12290911EF00FA0CC9 /* GoogleService-Info.plist */; };
@@ -28,6 +26,11 @@
 		D4AA2D1D2909176700FA0CC9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA2D1C2909176700FA0CC9 /* LoginViewController.swift */; };
 		D4AA2D2029091CAA00FA0CC9 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D4AA2D1F29091CAA00FA0CC9 /* GoogleSignIn */; };
 		D4AA2D2229091CAA00FA0CC9 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D4AA2D2129091CAA00FA0CC9 /* GoogleSignInSwift */; };
+		D4AA2D242909303100FA0CC9 /* ExpenseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA2D232909303100FA0CC9 /* ExpenseRepository.swift */; };
+		D4AA2D28290930B300FA0CC9 /* ExpenseLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA2D27290930B300FA0CC9 /* ExpenseLocalDataSource.swift */; };
+		D4AA2D2A290930C300FA0CC9 /* ExpenseRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA2D29290930C300FA0CC9 /* ExpenseRemoteDataSource.swift */; };
+		D4AA2D2D2909319C00FA0CC9 /* Expense+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA2D2B2909319C00FA0CC9 /* Expense+CoreDataProperties.swift */; };
+		D4AA2D2E2909319C00FA0CC9 /* Expense+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA2D2C2909319C00FA0CC9 /* Expense+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,12 +65,15 @@
 		D49BD90F2907BFC6006E501F /* ExpenseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpenseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D49BD9132907BFC6006E501F /* ExpenseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseUITests.swift; sourceTree = "<group>"; };
 		D49BD9152907BFC6006E501F /* ExpenseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		D49BD9272907C82F006E501F /* Expenses+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Expenses+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		D49BD9282907C82F006E501F /* Expenses+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Expenses+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D49BD92B2907D67F006E501F /* ExpenseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseTableViewCell.swift; sourceTree = "<group>"; };
 		D49BD92D2907EC86006E501F /* AddEditExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditExpenseViewController.swift; sourceTree = "<group>"; };
 		D4AA2D12290911EF00FA0CC9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D4AA2D1C2909176700FA0CC9 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D4AA2D232909303100FA0CC9 /* ExpenseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseRepository.swift; sourceTree = "<group>"; };
+		D4AA2D27290930B300FA0CC9 /* ExpenseLocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseLocalDataSource.swift; sourceTree = "<group>"; };
+		D4AA2D29290930C300FA0CC9 /* ExpenseRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseRemoteDataSource.swift; sourceTree = "<group>"; };
+		D4AA2D2B2909319C00FA0CC9 /* Expense+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Expense+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D4AA2D2C2909319C00FA0CC9 /* Expense+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Expense+CoreDataClass.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,8 +166,11 @@
 		D49BD9262907C82F006E501F /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				D49BD9272907C82F006E501F /* Expenses+CoreDataProperties.swift */,
-				D49BD9282907C82F006E501F /* Expenses+CoreDataClass.swift */,
+				D4AA2D2C2909319C00FA0CC9 /* Expense+CoreDataClass.swift */,
+				D4AA2D2B2909319C00FA0CC9 /* Expense+CoreDataProperties.swift */,
+				D4AA2D232909303100FA0CC9 /* ExpenseRepository.swift */,
+				D4AA2D27290930B300FA0CC9 /* ExpenseLocalDataSource.swift */,
+				D4AA2D29290930C300FA0CC9 /* ExpenseRemoteDataSource.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -314,10 +323,13 @@
 				D49BD8F42907BFC4006E501F /* ViewController.swift in Sources */,
 				D49BD92C2907D67F006E501F /* ExpenseTableViewCell.swift in Sources */,
 				D49BD8F02907BFC4006E501F /* AppDelegate.swift in Sources */,
-				D49BD9292907C82F006E501F /* Expenses+CoreDataProperties.swift in Sources */,
-				D49BD92A2907C82F006E501F /* Expenses+CoreDataClass.swift in Sources */,
+				D4AA2D28290930B300FA0CC9 /* ExpenseLocalDataSource.swift in Sources */,
 				D49BD8F22907BFC4006E501F /* SceneDelegate.swift in Sources */,
+				D4AA2D2D2909319C00FA0CC9 /* Expense+CoreDataProperties.swift in Sources */,
+				D4AA2D242909303100FA0CC9 /* ExpenseRepository.swift in Sources */,
 				D49BD92E2907EC86006E501F /* AddEditExpenseViewController.swift in Sources */,
+				D4AA2D2E2909319C00FA0CC9 /* Expense+CoreDataClass.swift in Sources */,
+				D4AA2D2A290930C300FA0CC9 /* ExpenseRemoteDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

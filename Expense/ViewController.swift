@@ -8,10 +8,12 @@
 import UIKit
 import CoreData
 import Firebase
+import FirebaseFirestore
+
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var expenses : [Expenses] = []
+    var expenses : [Expense] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,26 +47,41 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             if let context = delegate.persistentContainer.viewContext as NSManagedObjectContext? {
                 
-                let expense1 = Expenses(context: context)
+                let expense1 = Expense(context: context)
                 expense1.title = "Pay Bill"
                 expense1.amount = 500
                 expense1.catagory = "🧾" // Income, Expense
                 expense1.created = Date()
                 expenses.append(expense1)
 
-                let expense2 = Expenses(context: context)
+                let expense2 = Expense(context: context)
                 expense2.title = "Buy food"
                 expense2.amount = 60
                 expense2.catagory = "🍜" // Income, Expense
                 expense2.created = Date()
                 expenses.append(expense2)
 
-                let expense3 = Expenses(context: context)
+                let expense3 = Expense(context: context)
                 expense3.title = "Ice cream"
                 expense3.amount = 20
                 expense3.catagory = "🍦" // Income, Expense
                 expense3.created = Date()
                 expenses.append(expense3)
+                
+        
+                let db = Firestore.firestore()
+                var ref: DocumentReference? = nil
+                ref = db.collection("expenses").addDocument(data: ["title": "Pay Bill",
+                                                             "amount": 60,
+                                                             "catagory": "🧾",
+                                                             "created": Date()]) { err in
+                            if let err = err {
+                                print("Error adding document: \(err)")
+                            } else {
+                                print("Document added with ID: \(ref!.documentID)")
+                            }
+                        }
+            
             }
         }
     }
