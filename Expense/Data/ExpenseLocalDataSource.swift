@@ -49,30 +49,63 @@ class ExpenseLocalDataSource {
     
     func saveExpense(expense: Expense) {
         
-        context.perform { [unowned self] in
+        if (expense.identifier != nil){
             
-            let entity = NSEntityDescription.entity(forEntityName: "Expenses", in: self.context)!
-            let expenseObject = NSManagedObject(entity: entity, insertInto: self.context) as? Expenses
+            context.perform { [unowned self] in
+                
+                let entity = NSEntityDescription.entity(forEntityName: "Expenses", in: self.context)!
+                let expenseObject = NSManagedObject(entity: entity, insertInto: self.context) as? Expenses
+                
+                expenseObject?.identifier = expense.identifier
+                expenseObject?.title = expense.title
+                expenseObject?.detail = expense.detail
+                expenseObject?.catagory = expense.catagory
+                expenseObject?.type = expense.type
+                expenseObject?.amount = expense.amount
+                expenseObject?.created = expense.created
+                
+                do {
+                    try self.context.save()
+                } catch let error as NSError {
+                    print("Could not save. \(error), \(error.userInfo)")
+                }
+            }
             
-            expenseObject?.identifier = expense.identifier
-            expenseObject?.title = expense.title
-            expenseObject?.detail = expense.detail
-            expenseObject?.catagory = expense.catagory
-            expenseObject?.type = expense.type
-            expenseObject?.amount = expense.amount
-            expenseObject?.created = expense.created
+        }else {
             
+            let fetchRequest: NSFetchRequest<Expenses> = NSFetchRequest(entityName: "Expenses")
+            fetchRequest.predicate = NSPredicate(format: "identifier == %@", expense.identifier!)
             do {
-                try self.context.save()
-            } catch let error as NSError {
+                let results = try context.fetch(fetchRequest)
+                if (results.count != 0){
+                    if let existedOjbect = results.first {
+                       
+                        existedOjbect.title = expense.title
+                        existedOjbect.detail = expense.detail
+                        existedOjbect.amount = expense.amount
+                        existedOjbect.catagory = expense.catagory
+                        existedOjbect.type = expense.type
+                        existedOjbect.created = expense.created
+                        
+                        do {
+                            try self.context.save()
+                        } catch let error as NSError {
+                            print("Could not save. \(error), \(error.userInfo)")
+                        }
+                    }
+                }
+                
+            } catch let error as NSError{
                 print("Could not save. \(error), \(error.userInfo)")
             }
         }
     }
     
-    func saveExpenses(expenses: [Expense]) {
+    func saveExpenses(expenses: [Expense] , completion: @escaping(_ expenses: [Expense], _ error: String?) -> Void) {
         
         context.perform { [unowned self] in
+            
+            var completionResult: [Expense] = []
             
             for expense in expenses {
                 
@@ -86,12 +119,16 @@ class ExpenseLocalDataSource {
                 expenseObject?.type = expense.type
                 expenseObject?.amount = expense.amount
                 expenseObject?.created = expense.created
+                
+                completionResult.append(Expense.from(expenses: expenseObject!))
             }
             
             do {
                 try self.context.save()
+                completion(completionResult, nil)
             } catch let error as NSError {
                 print("Could not save. \(error), \(error.userInfo)")
+                completion([], error.localizedDescription)
             }
         }
     }
