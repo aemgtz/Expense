@@ -7,92 +7,109 @@
 
 import UIKit
 import Firebase
-import FirebaseFirestore
+import FirebaseFirestoreSwift
 
-class ExpenseRemoteDataSource {
+class ExpenseRemoteDataSource : NSObject {
     
     static let shared = ExpenseRemoteDataSource()
-
+    
+    private override init() {}
+    
     private let db = Firestore.firestore()
     private let collectionName = "expenses"
     
-    func getExpenses(completion: @escaping(_ expenses: [DocumentSnapshot], _ error: String?) -> Void) {
+    func getExpenses(completion: @escaping(_ expenses: [Expense], _ error: String?) -> Void) {
         
-        db.collection(collectionName).getDocuments() { (querySnapshot , err) in
-            if let err = err {
-                completion([], err.localizedDescription)
+        db.collection(collectionName).getDocuments() { (querySnapshot , error) in
+            if let _error = error {
+                completion([], _error.localizedDescription)
             } else {
                 if let documents = querySnapshot?.documents {
-                    completion(documents, nil)
+                    var expenses: [Expense] = []
+                    for document in documents {
+                        do {
+                            try expenses.append(document.data(as:Expense.self))
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                    completion(expenses, nil)
                 }
             }
         }
     }
     
-    func saveExpense(expense: Expense, completion: @escaping(_ expense: DocumentSnapshot?, _ error: String?) -> Void) {
-        
+    func saveExpense(expense: Expense, completion: @escaping(_ expense: Expense?, _ error: String?) -> Void) {
+
         if (expense.identifier != nil){
-            // update
-            let data : [String : Any] = ["title": expense.title ?? "",
-                                         "amount": expense.amount ,
-                                         "catagory": expense.catagory ?? "",
-                                         "created":expense.created ?? Date()]
             
-            var ref: DocumentReference? = nil
-            ref = db.collection(collectionName).document(expense.identifier!)
-            ref?.updateData(data) { err in
-                if let err = err {
-                    print("Error updating document: \(err)")
-                } else {
-                    print("Document successfully updated")
-                    ref?.getDocument { (document, error) in
-                        if let document = document, document.exists {
-                            completion(document, nil)
-                        } else {
-                            print("Document does not exist")
-                            completion(nil, error?.localizedDescription)
-                        }
+            do {
+                try db.collection(collectionName).document(expense.identifier!).setData(from: expense, completion: { error in
+                    if let _error = error {
+                        completion(nil, _error.localizedDescription)
+                    }else {
+                        completion(expense, nil)
                     }
-                }
+                })
+            } catch let error {
+                completion(nil, error.localizedDescription)
             }
+            
             
         }else{
             // insert
-            let data : [String : Any] = ["title": expense.title ?? "",
-                                         "amount": expense.amount ,
-                                         "catagory": expense.catagory ?? "",
-                                         "created":expense.created ?? Date()]
-            
-            var ref: DocumentReference? = nil
-            ref = db.collection("expenses").addDocument(data: data) { err in
-                if let err = err {
-                    print("Error adding document: \(err)")
-                } else {
-                    print("Document added with ID: \(ref!.documentID)")
-                    
-                    ref?.getDocument { (document, error) in
-                        if let document = document, document.exists {
-                            completion(document, nil)
-                        } else {
-                            print("Document does not exist")
-                            completion(nil, error?.localizedDescription)
+//            let data : [String : Any] = ["title": expense.title ?? "",
+//                                         "amount": expense.amount ,
+//                                         "catagory": expense.catagory ?? "",
+//                                         "created":expense.created ?? Date()]
+//
+//            var ref: DocumentReference? = nil
+//            ref = db.collection("expenses").addDocument(data: data) { err in
+//                if let err = err {
+//                    print("Error adding document: \(err)")
+//                } else {
+//                    print("Document added with ID: \(ref!.documentID)")
+//
+//                    ref?.getDocument { (document, error) in
+//                        if let document = document, document.exists {
+//                            completion(document, nil)
+//                        } else {
+//                            print("Document does not exist")
+//                            completion(nil, error?.localizedDescription)
+//                        }
+//                    }
+//                }
+//            }
+            var documentRef: DocumentReference? = nil
+            do {
+                try documentRef = db.collection(collectionName).addDocument(from: expense, completion: { _ in
+                    documentRef?.getDocument(as: Expense.self) { result in
+                        switch result {
+                        case .success(let expense):
+                            completion(expense, nil)
+                        case .failure(let error):
+                            completion(nil, error.localizedDescription)
                         }
                     }
-                }
+                    
+                })
+                
+            } catch let error {
+                completion(nil, error.localizedDescription)
             }
         }
     }
     
     func deleteExpense(expense: Expense, completion: @escaping(_ isSuccess: Bool?, _ error: String?) -> Void) {
         
-        db.collection(collectionName).document(expense.identifier!).delete() { err in
-                    if let err = err {
-                        print("Error removing document: \(err)")
-                        completion(nil, err.localizedDescription)
-                    } else {
-                        print("Document successfully removed!")
-                        completion(true, nil)
-                    }
-                }
+        db.collection(collectionName).document(expense.identifier!).delete() { error in
+            if let _error = error {
+                print("Error removing document: \(_error.localizedDescription)")
+                completion(nil, _error.localizedDescription)
+            } else {
+                print("Document successfully removed!")
+                completion(true, nil)
+            }
+        }
     }
 }

@@ -10,15 +10,14 @@ import CoreData
 import Firebase
 import FirebaseFirestore
 
-
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var expenses : [Expense] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        createMockupExpense()
+        //createMockupExpense()
         
         let rightBarButton = UIBarButtonItem.init(barButtonSystemItem:
                                                     UIBarButtonItem.SystemItem.add, target:
@@ -26,6 +25,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         navigationItem.rightBarButtonItem = rightBarButton
 
         checkUser()
+        createMockupExpense()
     }
     
     private func checkUser(){
@@ -43,47 +43,58 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     private func createMockupExpense(){
         
-        if let delegate = UIApplication.shared.delegate as? AppDelegate {
-            
-            if let context = delegate.persistentContainer.viewContext as NSManagedObjectContext? {
-                
-                let expense1 = Expense(context: context)
-                expense1.title = "Pay Bill"
-                expense1.amount = 500
-                expense1.catagory = "🧾" // Income, Expense
-                expense1.created = Date()
-                expenses.append(expense1)
+        //var expenses : [Expense] = []
 
-                let expense2 = Expense(context: context)
-                expense2.title = "Buy food"
-                expense2.amount = 60
-                expense2.catagory = "🍜" // Income, Expense
-                expense2.created = Date()
-                expenses.append(expense2)
+        var expense1 = Expense()
+        expense1.identifier = "8qSic6xGNvYygRNxoJwj"
+        expense1.title = "Pay Bill"
+        expense1.amount = 500
+        expense1.catagory = "🧾" // Income, Expense
+        expense1.created = Date()
+        expenses.append(expense1)
 
-                let expense3 = Expense(context: context)
-                expense3.title = "Ice cream"
-                expense3.amount = 20
-                expense3.catagory = "🍦" // Income, Expense
-                expense3.created = Date()
-                expenses.append(expense3)
-                
+        var expense2 = Expense()
+        expense2.identifier = "E1D4a3No72JWvERwcU2y"
+        expense2.title = "Buy food"
+        expense2.amount = 60
+        expense2.catagory = "🍜" // Income, Expense
+        expense2.created = Date()
+        expenses.append(expense2)
+
+        var expense3 = Expense()
+        expense3.identifier = "VKVnjYmpWHMGqh0u2HMY"
+        expense3.title = "Ice cream"
+        expense3.amount = 20
+        expense3.catagory = "🍦" // Income, Expense
+        expense3.created = Date()
+        expenses.append(expense3)
         
-                let db = Firestore.firestore()
-                var ref: DocumentReference? = nil
-                ref = db.collection("expenses").addDocument(data: ["title": "Pay Bill",
-                                                             "amount": 60,
-                                                             "catagory": "🧾",
-                                                             "created": Date()]) { err in
-                            if let err = err {
-                                print("Error adding document: \(err)")
-                            } else {
-                                print("Document added with ID: \(ref!.documentID)")
-                            }
-                        }
+        for expense in expenses {
             
+            ExpenseRemoteDataSource.shared.saveExpense(expense: expense) { expense, error in
+
             }
         }
+        
+    }
+    
+    private func fetchExpense() {
+        
+    }
+    
+    private func addExpene(expense: DocumentSnapshot){
+        
+//        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+//
+//            if let context = delegate.persistentContainer.viewContext as NSManagedObjectContext? {
+//
+//                var newExpense = Expense()
+//                newExpense.title = expense["title"] as? String
+//                newExpense.amount = expense["amount"] as? Double ?? 0
+//                newExpense.catagory = expense["catagory"] as? String
+//                expenses.append(newExpense)
+//            }
+//        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

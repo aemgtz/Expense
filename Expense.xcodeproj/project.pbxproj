@@ -29,8 +29,9 @@
 		D4AA2D242909303100FA0CC9 /* ExpenseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA2D232909303100FA0CC9 /* ExpenseRepository.swift */; };
 		D4AA2D28290930B300FA0CC9 /* ExpenseLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA2D27290930B300FA0CC9 /* ExpenseLocalDataSource.swift */; };
 		D4AA2D2A290930C300FA0CC9 /* ExpenseRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA2D29290930C300FA0CC9 /* ExpenseRemoteDataSource.swift */; };
-		D4AA2D2D2909319C00FA0CC9 /* Expense+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA2D2B2909319C00FA0CC9 /* Expense+CoreDataProperties.swift */; };
-		D4AA2D2E2909319C00FA0CC9 /* Expense+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AA2D2C2909319C00FA0CC9 /* Expense+CoreDataClass.swift */; };
+		D4E6502129094E8400BFE122 /* ExpenseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E6502029094E8400BFE122 /* ExpenseDataSource.swift */; };
+		D4E6502329094FC500BFE122 /* AppDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E6502229094FC500BFE122 /* AppDatabase.swift */; };
+		D4E650252909524B00BFE122 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E650242909524B00BFE122 /* Expense.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,8 +73,9 @@
 		D4AA2D232909303100FA0CC9 /* ExpenseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseRepository.swift; sourceTree = "<group>"; };
 		D4AA2D27290930B300FA0CC9 /* ExpenseLocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseLocalDataSource.swift; sourceTree = "<group>"; };
 		D4AA2D29290930C300FA0CC9 /* ExpenseRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseRemoteDataSource.swift; sourceTree = "<group>"; };
-		D4AA2D2B2909319C00FA0CC9 /* Expense+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Expense+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		D4AA2D2C2909319C00FA0CC9 /* Expense+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Expense+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D4E6502029094E8400BFE122 /* ExpenseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDataSource.swift; sourceTree = "<group>"; };
+		D4E6502229094FC500BFE122 /* AppDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDatabase.swift; sourceTree = "<group>"; };
+		D4E650242909524B00BFE122 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,11 +168,12 @@
 		D49BD9262907C82F006E501F /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				D4AA2D2C2909319C00FA0CC9 /* Expense+CoreDataClass.swift */,
-				D4AA2D2B2909319C00FA0CC9 /* Expense+CoreDataProperties.swift */,
+				D4E650242909524B00BFE122 /* Expense.swift */,
 				D4AA2D232909303100FA0CC9 /* ExpenseRepository.swift */,
 				D4AA2D27290930B300FA0CC9 /* ExpenseLocalDataSource.swift */,
 				D4AA2D29290930C300FA0CC9 /* ExpenseRemoteDataSource.swift */,
+				D4E6502029094E8400BFE122 /* ExpenseDataSource.swift */,
+				D4E6502229094FC500BFE122 /* AppDatabase.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -324,11 +327,12 @@
 				D49BD92C2907D67F006E501F /* ExpenseTableViewCell.swift in Sources */,
 				D49BD8F02907BFC4006E501F /* AppDelegate.swift in Sources */,
 				D4AA2D28290930B300FA0CC9 /* ExpenseLocalDataSource.swift in Sources */,
+				D4E6502129094E8400BFE122 /* ExpenseDataSource.swift in Sources */,
 				D49BD8F22907BFC4006E501F /* SceneDelegate.swift in Sources */,
-				D4AA2D2D2909319C00FA0CC9 /* Expense+CoreDataProperties.swift in Sources */,
+				D4E650252909524B00BFE122 /* Expense.swift in Sources */,
 				D4AA2D242909303100FA0CC9 /* ExpenseRepository.swift in Sources */,
+				D4E6502329094FC500BFE122 /* AppDatabase.swift in Sources */,
 				D49BD92E2907EC86006E501F /* AddEditExpenseViewController.swift in Sources */,
-				D4AA2D2E2909319C00FA0CC9 /* Expense+CoreDataClass.swift in Sources */,
 				D4AA2D2A290930C300FA0CC9 /* ExpenseRemoteDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

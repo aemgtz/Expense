@@ -10,7 +10,6 @@ import CoreData
 
 class ExpenseLocalDataSource {
     
-    
     private static var sharedInstance: ExpenseLocalDataSource!
 
        var context: NSManagedObjectContext?
@@ -32,14 +31,14 @@ class ExpenseLocalDataSource {
        }
 
     
-    func getExpenses() -> [Expense]? {
+    func getExpenses() -> [Expenses]? {
         
-        let fetchRequest: NSFetchRequest<Expense> = NSFetchRequest(entityName: "Expense")
+        let fetchRequest: NSFetchRequest<Expenses> = NSFetchRequest(entityName: "Expenses")
         let sorter: NSSortDescriptor = NSSortDescriptor(key: "created" , ascending: false)
         fetchRequest.sortDescriptors = [sorter]
         fetchRequest.returnsObjectsAsFaults = false
 
-        var result = [Expense]()
+        var result = [Expenses]()
 
         do {
             result = try context!.fetch(fetchRequest)

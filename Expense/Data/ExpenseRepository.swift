@@ -21,7 +21,6 @@ class ExpenseRepository {
     
     func getExpenses(completion: @escaping(_ expenses: [Expense], _ error: String?) -> Void) {
 
-        
     }
     
     func saveExpense(expense: Expense) {
