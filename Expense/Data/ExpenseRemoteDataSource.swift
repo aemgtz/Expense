@@ -57,30 +57,9 @@ class ExpenseRemoteDataSource : NSObject {
             
             
         }else{
-            // insert
-//            let data : [String : Any] = ["title": expense.title ?? "",
-//                                         "amount": expense.amount ,
-//                                         "catagory": expense.catagory ?? "",
-//                                         "created":expense.created ?? Date()]
-//
-//            var ref: DocumentReference? = nil
-//            ref = db.collection("expenses").addDocument(data: data) { err in
-//                if let err = err {
-//                    print("Error adding document: \(err)")
-//                } else {
-//                    print("Document added with ID: \(ref!.documentID)")
-//
-//                    ref?.getDocument { (document, error) in
-//                        if let document = document, document.exists {
-//                            completion(document, nil)
-//                        } else {
-//                            print("Document does not exist")
-//                            completion(nil, error?.localizedDescription)
-//                        }
-//                    }
-//                }
-//            }
+            
             var documentRef: DocumentReference? = nil
+            
             do {
                 try documentRef = db.collection(collectionName).addDocument(from: expense, completion: { _ in
                     documentRef?.getDocument(as: Expense.self) { result in

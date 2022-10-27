@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 public struct Expense: Codable {
     
@@ -15,7 +16,7 @@ public struct Expense: Codable {
     var amount: Double = 0
     var type: String?
     var catagory: String?
-    var created: Date = Date()
+    var created: Date? = Date()
     
     enum CodingKeys: String, CodingKey {
         case identifier
@@ -25,6 +26,16 @@ public struct Expense: Codable {
         case type
         case catagory
         case created
+    }
+    
+    static func from(expenses: Expenses) -> Expense{
+        return Expense(identifier: expenses.identifier,
+                       title: expenses.title,
+                       detail: expenses.detail,
+                       amount: expenses.amount,
+                       type: expenses.type,
+                       catagory: expenses.catagory,
+                       created: expenses.created)
     }
     
 }
