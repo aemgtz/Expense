@@ -19,6 +19,8 @@ class ExpenseViewController: UIViewController, UITableViewDataSource, UITableVie
     private var expenses : [Expense] = []
     
     private var expensesRepository: ExpenseRepository? = nil
+    
+    private var expenseViewModel: ExpenseViewModel? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,12 @@ class ExpenseViewController: UIViewController, UITableViewDataSource, UITableVie
         let localDataSouce = ExpenseLocalDataSource.shared(context: AppDatabase.shared.managedObjectContext)
         expensesRepository = ExpenseRepository(remoteDataSource: remoteDataSouce, localDataSource: localDataSouce)
         
+        expenseViewModel = ExpenseViewModel(expenseRepository: expensesRepository!)
+        expenseViewModel?.expeses.bind { [weak self] expenses in
+            self?.expenses = expenses
+            self?.tableView.reloadData()
+        }
+    
         let rightBarButton = UIBarButtonItem.init(barButtonSystemItem:
                                                     UIBarButtonItem.SystemItem.add, target:
                                                     self, action: #selector(rightBarButtonItemTapped(_:)))
@@ -35,8 +43,9 @@ class ExpenseViewController: UIViewController, UITableViewDataSource, UITableVie
         
         setupTableView()
         checkUser()
-        //createMockupExpense()
-        fetchExpense()
+        
+        expenseViewModel?.fetchExpeses(forceUpdate: true)
+
     }
     
     private func setupTableView(){
@@ -47,9 +56,7 @@ class ExpenseViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @objc func refresh(_ sender: UIRefreshControl) {
         
-        expensesRepository?.refreshExpenses()
-        fetchExpense()
-        
+        expenseViewModel?.fetchExpeses(forceUpdate: true)
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [unowned self] in
             // Code to be executed
             self.refreshControl?.endRefreshing()
@@ -100,45 +107,16 @@ class ExpenseViewController: UIViewController, UITableViewDataSource, UITableVie
         
         for expense in expenses {
 
-            ExpenseRemoteDataSource.shared.saveExpense(expense: expense) { expense, error in
-
-            }
-        }
-        
-    }
-    
-    private func fetchExpense() {
-            
-        expensesRepository?.getExpenses { [unowned self] expenses, error in
-            if let _error = error {
-                // display error on screen
-            }else{
-                
-                self.expenses = expenses
-                self.expenses.sort { expense1, expense2 in
-                    return (expense1.created!.compare(expense2.created!) == ComparisonResult.orderedAscending)
-                }
-                self.expenses.forEach { item in
-                    print("Name: \(item.title) Category: \(item.catagory)")
-                }
-                self.tableView.reloadData()
-            }
-        }
-    }
-    
-    private func addExpene(expense: DocumentSnapshot){
-        
-//        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+//            ExpenseRemoteDataSource.shared.saveExpense(expense: expense) { expense, error in
 //
-//            if let context = delegate.persistentContainer.viewContext as NSManagedObjectContext? {
-//
-//                var newExpense = Expense()
-//                newExpense.title = expense["title"] as? String
-//                newExpense.amount = expense["amount"] as? Double ?? 0
-//                newExpense.catagory = expense["catagory"] as? String
-//                expenses.append(newExpense)
 //            }
-//        }
+        }
+        
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        expenseViewModel?.fetchExpeses(forceUpdate: false)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

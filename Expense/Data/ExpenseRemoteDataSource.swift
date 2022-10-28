@@ -28,7 +28,9 @@ class ExpenseRemoteDataSource : NSObject {
                     var expenses: [Expense] = []
                     for document in documents {
                         do {
-                            try expenses.append(document.data(as:Expense.self))
+                            var newExpense = try document.data(as:Expense.self)
+                            newExpense.identifier = document.documentID
+                            expenses.append(newExpense)
                         } catch {
                             print(error.localizedDescription)
                         }
