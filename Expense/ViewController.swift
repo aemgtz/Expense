@@ -14,14 +14,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var tableView: UITableView!
     
-    var refreshControl: UIRefreshControl? = nil
+    private var refreshControl: UIRefreshControl? = nil
 
-    var expenses : [Expense] = []
+    private var expenses : [Expense] = []
+    
+    private var expensesRepository: ExpenseRepository? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        //createMockupExpense()
+        let remoteDataSouce = ExpenseRemoteDataSource.shared
+        let localDataSouce = ExpenseLocalDataSource.shared(context: AppDatabase.shared.managedObjectContext)
+        expensesRepository = ExpenseRepository(remoteDataSource: remoteDataSouce, localDataSource: localDataSouce)
         
         let rightBarButton = UIBarButtonItem.init(barButtonSystemItem:
                                                     UIBarButtonItem.SystemItem.add, target:
@@ -43,9 +47,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @objc func refresh(_ sender: UIRefreshControl) {
         
+        expensesRepository?.refreshExpenses()
+        fetchExpense()
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [unowned self] in
             // Code to be executed
             self.refreshControl?.endRefreshing()
+
         }
     }
     
@@ -100,12 +108,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     private func fetchExpense() {
-        
-        let remoteDataSouce = ExpenseRemoteDataSource.shared
-        let localDataSouce = ExpenseLocalDataSource.shared(context: AppDatabase.shared.managedObjectContext)
-        let expensesRepository = ExpenseRepository(remoteDataSource: remoteDataSouce, localDataSource: localDataSouce)
-    
-        expensesRepository.getExpenses { [unowned self] expenses, error in
+            
+        expensesRepository?.getExpenses { [unowned self] expenses, error in
             if let _error = error {
                 // display error on screen
             }else{
