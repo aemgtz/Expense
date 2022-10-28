@@ -66,7 +66,7 @@ class ExpenseLocalDataSource {
         
         if (expense.identifier != nil){
             
-            context.perform { [weak self] in
+            context.perform { [unowned self] in
                 
                 let entity = NSEntityDescription.entity(forEntityName: "Expenses", in: self.context)!
                 let expenseObject = NSManagedObject(entity: entity, insertInto: self.context) as? Expenses
@@ -118,7 +118,7 @@ class ExpenseLocalDataSource {
     
     func saveExpenses(expenses: [Expense] , completion: @escaping(_ expenses: [Expense], _ error: String?) -> Void) {
         
-        context.perform { [weak self] in
+        context.perform { [unowned self] in
             
             var completionResult: [Expense] = []
             
