@@ -13,6 +13,8 @@ import FirebaseFirestore
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    
+    var refreshControl: UIRefreshControl? = nil
 
     var expenses : [Expense] = []
 
@@ -26,9 +28,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                                                     self, action: #selector(rightBarButtonItemTapped(_:)))
         navigationItem.rightBarButtonItem = rightBarButton
 
+        
+        setupTableView()
         checkUser()
         //createMockupExpense()
         fetchExpense()
+    }
+    
+    private func setupTableView(){
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        self.tableView.addSubview(refreshControl!)
+    }
+    
+    @objc func refresh(_ sender: UIRefreshControl) {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [unowned self] in
+            // Code to be executed
+            self.refreshControl?.endRefreshing()
+        }
     }
     
     private func checkUser(){
@@ -87,8 +105,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let localDataSouce = ExpenseLocalDataSource.shared(context: AppDatabase.shared.managedObjectContext)
         let expensesRepository = ExpenseRepository(remoteDataSource: remoteDataSouce, localDataSource: localDataSouce)
     
-        //expensesRepository.refreshExpenses()
-        
         expensesRepository.getExpenses { [unowned self] expenses, error in
             if let _error = error {
                 // display error on screen
@@ -97,6 +113,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.expenses.forEach { item in
                     print("Name: \(item.title) Category: \(item.catagory)")
                 }
+                self.tableView.reloadData()
             }
         }
     }
