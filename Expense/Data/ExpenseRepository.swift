@@ -58,8 +58,14 @@ class ExpenseRepository {
     }
     
     
-    func saveExpense(expense: Expense) {
-        
+    func saveExpense(expense: Expense, completion: @escaping(_ expense: Expense?, _ error: String?) -> Void) {
+        remoteDataSource.saveExpense(expense: expense) { expense, error in
+            if let _error = error{
+                completion(nil, _error)
+            }else{
+                completion(expense, nil)
+            }
+        }
     }
     
     func deleteExpense(expense: Expense) {

@@ -10,7 +10,7 @@ import CoreData
 import Firebase
 import FirebaseFirestore
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ExpenseViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -113,7 +113,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if let _error = error {
                 // display error on screen
             }else{
+                
                 self.expenses = expenses
+                self.expenses.sort { expense1, expense2 in
+                    return (expense1.created!.compare(expense2.created!) == ComparisonResult.orderedAscending)
+                }
                 self.expenses.forEach { item in
                     print("Name: \(item.title) Category: \(item.catagory)")
                 }

@@ -10,12 +10,23 @@ import UIKit
 class AddEditExpenseViewController: UIViewController {
 
     @IBOutlet weak var amountTextField: UITextField!
+    @IBOutlet weak var titleTextField: UITextField!
+    
+
+    private var expensesRepository: ExpenseRepository? = nil
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        let remoteDataSouce = ExpenseRemoteDataSource.shared
+        let localDataSouce = ExpenseLocalDataSource.shared(context: AppDatabase.shared.managedObjectContext)
+        expensesRepository = ExpenseRepository(remoteDataSource: remoteDataSouce, localDataSource: localDataSouce)
+        
         amountTextField.text = ""
         amountTextField.placeholder = "$199.0"
+        amountTextField.keyboardType = .numberPad
         
         let rightBarButton = UIBarButtonItem.init(barButtonSystemItem:
                                                     UIBarButtonItem.SystemItem.save, target:
@@ -40,7 +51,20 @@ class AddEditExpenseViewController: UIViewController {
     
 
     @IBAction func saveButtonTouched(_ sender: Any) {
-        dismiss(animated: true)
+        
+        if let amountText = amountTextField.text, let amount = Double(amountText),  let title = titleTextField.text{
+            
+            var expense = Expense()
+            expense.title = title
+            expense.amount = amount
+            expense.catagory = "🧾"
+            expense.created = Date()
+            
+            expensesRepository?.saveExpense(expense: expense, completion: { expense, error in
+                self.dismiss(animated: true)
+            })
+        }
+
     }
     
     /*

@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="-1281" y="-13"/>
         </scene>
-        <!--View Controller-->
+        <!--Expense View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Expense" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ExpenseViewController" customModule="Expense" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,14 +37,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExpenseTableViewCell" id="r6y-SX-qxY" customClass="ExpenseTableViewCell" customModule="Expense" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="390" height="31.666666030883789"/>
+                                        <rect key="frame" x="0.0" y="50" width="390" height="32.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r6y-SX-qxY" id="h1I-EL-4wd">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="31.666666030883789"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="32.333332061767578"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🍻" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Id-vk-9K2">
-                                                    <rect key="frame" x="20" y="0.0" width="30" height="31.666666666666668"/>
+                                                    <rect key="frame" x="20" y="0.0" width="30" height="32.333333333333336"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="3NK-q4-XTy"/>
                                                     </constraints>
@@ -53,7 +53,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$100" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q77-F0-v4e">
-                                                    <rect key="frame" x="310" y="0.0" width="60" height="31.666666666666668"/>
+                                                    <rect key="frame" x="310" y="0.0" width="60" height="32.333333333333336"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="O6y-MX-J64"/>
                                                     </constraints>
@@ -62,7 +62,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay bill" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBb-Jg-G6Q">
-                                                    <rect key="frame" x="58" y="0.0" width="244" height="31.666666666666668"/>
+                                                    <rect key="frame" x="58" y="0.0" width="244" height="32.333333333333336"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -139,17 +139,29 @@
                                     <action selector="saveButtonTouched:" destination="7x4-hN-qdF" eventType="touchUpInside" id="uTw-Dh-Wbw"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zuC-V5-BSo">
+                                <rect key="frame" x="20" y="227" width="350" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="KM4-2L-xZg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="WrB-Oe-Ugv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="zuC-V5-BSo" firstAttribute="leading" secondItem="WrB-Oe-Ugv" secondAttribute="leading" constant="20" id="5Y4-rz-hu7"/>
                             <constraint firstItem="WrB-Oe-Ugv" firstAttribute="trailing" secondItem="m1A-68-aHT" secondAttribute="trailing" constant="40" id="6Ya-yd-jKa"/>
+                            <constraint firstItem="zuC-V5-BSo" firstAttribute="top" secondItem="m1A-68-aHT" secondAttribute="bottom" constant="10" id="Cvv-jn-4Ll"/>
                             <constraint firstItem="m1A-68-aHT" firstAttribute="leading" secondItem="WrB-Oe-Ugv" secondAttribute="leading" constant="40" id="R22-BO-Sij"/>
                             <constraint firstItem="m1A-68-aHT" firstAttribute="top" secondItem="WrB-Oe-Ugv" secondAttribute="top" constant="70" id="TyM-JQ-77B"/>
+                            <constraint firstItem="WrB-Oe-Ugv" firstAttribute="trailing" secondItem="zuC-V5-BSo" secondAttribute="trailing" constant="20" id="X7v-Ee-owE"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="amountTextField" destination="m1A-68-aHT" id="12A-Af-YZj"/>
+                        <outlet property="titleTextField" destination="zuC-V5-BSo" id="h17-W9-MnH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gCt-aN-akO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

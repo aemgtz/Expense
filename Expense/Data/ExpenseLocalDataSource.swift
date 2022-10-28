@@ -34,7 +34,7 @@ class ExpenseLocalDataSource {
     func getExpenses(completion: @escaping(_ expenses: [Expense], _ error: String?) -> Void) {
         
         let fetchRequest: NSFetchRequest<Expenses> = NSFetchRequest(entityName: "Expenses")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "created" , ascending: false)]
+//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "created" , ascending: true)]
 //        let asyncFetchRequest = NSAsynchronousFetchRequest<Expenses>(fetchRequest: fetchRequest) { fetchRequestResults in
 //
 //            if let finalResult: [Expenses] = fetchRequestResults.finalResult {
@@ -79,7 +79,7 @@ class ExpenseLocalDataSource {
                 expenseObject?.type = expense.type
                 expenseObject?.amount = expense.amount
                 expenseObject?.created = expense.created
-                
+
                 do {
                     try self.context.save()
                 } catch let error as NSError {
