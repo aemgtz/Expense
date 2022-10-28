@@ -34,6 +34,14 @@ class ExpenseViewController: UIViewController, UITableViewDataSource, UITableVie
             self?.expenses = expenses
             self?.tableView.reloadData()
         }
+        
+        expenseViewModel?.dataLoading.bind(listener: { [weak self] isLoading in
+            if (isLoading){
+                self?.refreshControl?.beginRefreshing()
+            }else{
+                self?.refreshControl?.endRefreshing()
+            }
+        })
     
         let rightBarButton = UIBarButtonItem.init(barButtonSystemItem:
                                                     UIBarButtonItem.SystemItem.add, target:
@@ -55,13 +63,7 @@ class ExpenseViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @objc func refresh(_ sender: UIRefreshControl) {
-        
         expenseViewModel?.fetchExpeses(forceUpdate: true)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [unowned self] in
-            // Code to be executed
-            self.refreshControl?.endRefreshing()
-
-        }
     }
     
     private func checkUser(){
@@ -79,8 +81,6 @@ class ExpenseViewController: UIViewController, UITableViewDataSource, UITableVie
     
     private func createMockupExpense(){
         
-        //var expenses : [Expense] = []
-
         var expense1 = Expense()
         expense1.identifier = "8qSic6xGNvYygRNxoJwj"
         expense1.title = "Pay Bill"
@@ -104,14 +104,7 @@ class ExpenseViewController: UIViewController, UITableViewDataSource, UITableVie
         expense3.catagory = "🍦" // Income, Expense
         expense3.created = Date()
         expenses.append(expense3)
-        
-        for expense in expenses {
 
-//            ExpenseRemoteDataSource.shared.saveExpense(expense: expense) { expense, error in
-//
-//            }
-        }
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
