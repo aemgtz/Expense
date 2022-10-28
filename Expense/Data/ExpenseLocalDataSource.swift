@@ -34,15 +34,30 @@ class ExpenseLocalDataSource {
     func getExpenses(completion: @escaping(_ expenses: [Expense], _ error: String?) -> Void) {
         
         let fetchRequest: NSFetchRequest<Expenses> = NSFetchRequest(entityName: "Expenses")
-        let _ = NSAsynchronousFetchRequest<Expenses>(fetchRequest: fetchRequest) { fetchRequestResults in
-            
-            if let finalResult: [Expenses] = fetchRequestResults.finalResult {
+//        let asyncFetchRequest = NSAsynchronousFetchRequest<Expenses>(fetchRequest: fetchRequest) { fetchRequestResults in
+//
+//            if let finalResult: [Expenses] = fetchRequestResults.finalResult {
+//                var completionResult: [Expense] = []
+//                for result in finalResult {
+//                    completionResult.append(Expense.from(expenses: result))
+//                }
+//                completion(completionResult, nil)
+//            }
+//        }
+        
+        do {
+            let results = try self.context.fetch(fetchRequest)
+            if (!results.isEmpty) {
                 var completionResult: [Expense] = []
-                for result in finalResult {
+                for result in results {
                     completionResult.append(Expense.from(expenses: result))
                 }
                 completion(completionResult, nil)
+            }else{
+                completion([], nil)
             }
+        } catch let error {
+            completion([], error.localizedDescription)
         }
     }
     
@@ -51,7 +66,7 @@ class ExpenseLocalDataSource {
         
         if (expense.identifier != nil){
             
-            context.perform { [unowned self] in
+            context.perform { [weak self] in
                 
                 let entity = NSEntityDescription.entity(forEntityName: "Expenses", in: self.context)!
                 let expenseObject = NSManagedObject(entity: entity, insertInto: self.context) as? Expenses
@@ -103,14 +118,14 @@ class ExpenseLocalDataSource {
     
     func saveExpenses(expenses: [Expense] , completion: @escaping(_ expenses: [Expense], _ error: String?) -> Void) {
         
-        context.perform { [unowned self] in
+        context.perform { [weak self] in
             
             var completionResult: [Expense] = []
             
             for expense in expenses {
                 
-                let entity = NSEntityDescription.entity(forEntityName: "Expenses", in: self.context)!
-                let expenseObject = NSManagedObject(entity: entity, insertInto: self.context) as? Expenses
+                let entity = NSEntityDescription.entity(forEntityName: "Expenses", in: context)!
+                let expenseObject = NSManagedObject(entity: entity, insertInto: context) as? Expenses
 
                 expenseObject?.identifier = expense.identifier
                 expenseObject?.title = expense.title

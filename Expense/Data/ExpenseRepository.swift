@@ -19,7 +19,7 @@ class ExpenseRepository {
         self.localDataSource = localDataSource
     }
     
-    var cacheIsDirty = false
+    private var cacheIsDirty = false
     var cachedExpenses:  [String: Expense] = [:]
 
     
@@ -36,19 +36,21 @@ class ExpenseRepository {
             
         }else{
             
-            localDataSource.getExpenses { [unowned self] expenses, error in
+            localDataSource.getExpenses { [weak self] expenses, error in
                 if let _error = error {
                     completion([], _error)
                 }else{
-                    refreshCache(expenses: expenses)
-                    completion(Array(cachedExpenses.values), nil)
+                    if let self = self {
+                        self.refreshCache(expenses: expenses)
+                        completion(Array(self.cachedExpenses.values), nil)
+                    }
                 }
             }
         }
     }
     
     private func getExpesesFromRemoteDataSource(completion: @escaping(_ expenses: [Expense], _ error: String?) -> Void) {
-        remoteDataSource.getExpenses { [unowned self] expenses, error in
+        remoteDataSource.getExpenses { expenses, error in
             self.refreshCache(expenses: expenses)
             self.refreshLocalDataSource(expenses: expenses)
             completion(Array(self.cachedExpenses.values), nil)
@@ -94,5 +96,8 @@ class ExpenseRepository {
         }
         return cached
     }
-
+    
+    func refreshExpenses() {
+        cacheIsDirty = true
+    }
 }

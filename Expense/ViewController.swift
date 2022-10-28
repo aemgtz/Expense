@@ -12,6 +12,8 @@ import FirebaseFirestore
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var tableView: UITableView!
+
     var expenses : [Expense] = []
 
     override func viewDidLoad() {
@@ -25,7 +27,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         navigationItem.rightBarButtonItem = rightBarButton
 
         checkUser()
-        createMockupExpense()
+        //createMockupExpense()
+        fetchExpense()
     }
     
     private func checkUser(){
@@ -70,7 +73,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         expenses.append(expense3)
         
         for expense in expenses {
-            
+
             ExpenseRemoteDataSource.shared.saveExpense(expense: expense) { expense, error in
 
             }
@@ -80,6 +83,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     private func fetchExpense() {
         
+        let remoteDataSouce = ExpenseRemoteDataSource.shared
+        let localDataSouce = ExpenseLocalDataSource.shared(context: AppDatabase.shared.managedObjectContext)
+        let expensesRepository = ExpenseRepository(remoteDataSource: remoteDataSouce, localDataSource: localDataSouce)
+    
+        //expensesRepository.refreshExpenses()
+        
+        expensesRepository.getExpenses { [unowned self] expenses, error in
+            if let _error = error {
+                // display error on screen
+            }else{
+                self.expenses = expenses
+                self.expenses.forEach { item in
+                    print("Name: \(item.title) Category: \(item.catagory)")
+                }
+            }
+        }
     }
     
     private func addExpene(expense: DocumentSnapshot){

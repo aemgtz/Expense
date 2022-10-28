@@ -37,14 +37,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExpenseTableViewCell" id="r6y-SX-qxY" customClass="ExpenseTableViewCell" customModule="Expense" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="390" height="32.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="50" width="390" height="31.666666030883789"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r6y-SX-qxY" id="h1I-EL-4wd">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="32.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="31.666666030883789"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🍻" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Id-vk-9K2">
-                                                    <rect key="frame" x="20" y="0.0" width="30" height="32.333333333333336"/>
+                                                    <rect key="frame" x="20" y="0.0" width="30" height="31.666666666666668"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="3NK-q4-XTy"/>
                                                     </constraints>
@@ -53,7 +53,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$100" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q77-F0-v4e">
-                                                    <rect key="frame" x="310" y="0.0" width="60" height="32.333333333333336"/>
+                                                    <rect key="frame" x="310" y="0.0" width="60" height="31.666666666666668"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="O6y-MX-J64"/>
                                                     </constraints>
@@ -62,7 +62,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pay bill" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBb-Jg-G6Q">
-                                                    <rect key="frame" x="58" y="0.0" width="244" height="32.333333333333336"/>
+                                                    <rect key="frame" x="58" y="0.0" width="244" height="31.666666666666668"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -105,6 +105,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="kx3-8X-EpX"/>
                     <connections>
+                        <outlet property="tableView" destination="eZn-fl-Ioo" id="ZM0-jt-YzK"/>
                         <segue destination="7x4-hN-qdF" kind="presentation" identifier="ExpenseToAddEdit" id="s7b-aq-a6o"/>
                         <segue destination="tIf-r3-uq8" kind="presentation" identifier="ExpenseToLogin" animates="NO" modalPresentationStyle="fullScreen" id="EOu-Ug-e1l"/>
                     </connections>
